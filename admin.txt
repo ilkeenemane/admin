@@ -1,0 +1,130 @@
+using System;
+using System.Collections.Generic;
+
+namespace AdminNamespace
+{
+    public class Admin
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public List<Notification> Notifications { get; set; } = new List<Notification>();
+    }
+
+    public class Notification
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+        public DateTime DateTime { get; set; }
+        public User FromUser { get; set; }
+    }
+}
+
+namespace UserNamespace
+{
+    public class User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public int Age { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
+
+namespace PostNamespace
+{
+    public class Post
+    {
+        public int Id { get; set; }
+        public string Content { get; set; }
+        public DateTime CreationDateTime { get; set; }
+        public int LikeCount { get; set; }
+        public int ViewCount { get; set; }
+    }
+}
+
+
+
+======================================================================
+
+
+using System;
+using System.Linq;
+
+namespace YourNamespace
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("User or admin access:");
+            string userType = Console.ReadLine();
+
+            if (userType.ToLower() == "user")
+            {
+                Console.WriteLine("Please enter the username and gmail:");
+                string usernameOrEmail = Console.ReadLine();
+                Console.WriteLine("Enter the password:");
+                string password = Console.ReadLine();
+
+
+                UserNamespace.User user = GetUserByUsernameOrEmail(usernameOrEmail);
+
+                if (user != null && user.Password == password)
+                {
+                
+                    Console.WriteLine("Access successfully");
+                    while (true)
+                    {
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Access unsuccessfully");
+                }
+            }
+            else if (userType.ToLower() == "admin")
+            {
+                Console.WriteLine("Enter the username and gmail");
+                string usernameOrEmail = Console.ReadLine();
+                Console.WriteLine("Enter the password");
+                string password = Console.ReadLine();
+
+
+                AdminNamespace.Admin admin = GetAdminByUsernameOrEmail(usernameOrEmail);
+
+                if (admin != null && admin.Password == password)
+                {
+                    // Admin girişi başarılı
+                    Console.WriteLine("Admin access succesfully");
+                    while (true)
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Admin access unsuccessfully");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid username");
+            }
+        }
+
+        static UserNamespace.User GetUserByUsernameOrEmail(string usernameOrEmail)
+        {
+      
+            return null;
+        }
+
+        static AdminNamespace.Admin GetAdminByUsernameOrEmail(string usernameOrEmail)
+        {
+            return null;
+        }
+    }
+}
